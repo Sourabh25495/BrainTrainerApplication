@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     Button b4;
     TextView ttv;
     RelativeLayout gameRL;
+    boolean clicked=false;
 
     ArrayList<Integer> answers=new ArrayList<Integer>();
     int Locationofcorrectanswers;
@@ -41,26 +42,28 @@ public class MainActivity extends AppCompatActivity {
         tv.setText("");
         GenerateQuestion();
         playagain.setVisibility(View.INVISIBLE);
-        new CountDownTimer(30100, 1000) {
+        if(clicked==true) {
+            new CountDownTimer(30100, 1000) {
 
 
-            @Override
-            public void onTick(long millisUntilFinished) {
+                @Override
+                public void onTick(long millisUntilFinished) {
 
-                ttv.setText(String.valueOf(millisUntilFinished/1000)+"s");
-            }
+                    ttv.setText(String.valueOf(millisUntilFinished / 1000) + "s");
+                }
 
-            @Override
-            public void onFinish() {
-                playagain.setVisibility(View.VISIBLE);
-                ttv.setText("0s");
-                tv.setText("Your score:"+ Integer.toString(score)+"/"+Integer.toString(numberOfQuestions));
-
-
-            }
+                @Override
+                public void onFinish() {
+                    playagain.setVisibility(View.VISIBLE);
+                    ttv.setText("0s");
+                    tv.setText("Your score:" + Integer.toString(score) + "/" + Integer.toString(numberOfQuestions));
 
 
-        }.start();
+                }
+
+
+            }.start();
+        }
 
 
     }
@@ -105,7 +108,10 @@ public class MainActivity extends AppCompatActivity {
     public void start(View view){
         startbutton.setVisibility(View.INVISIBLE);
         gameRL.setVisibility(RelativeLayout.VISIBLE);
-        playagain(findViewById(R.id.Playagain));
+        clicked=true;
+        if(clicked==true) {
+            playagain(findViewById(R.id.Playagain));
+        }
 
 
     }
